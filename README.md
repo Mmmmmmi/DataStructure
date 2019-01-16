@@ -1,2 +1,2 @@
-# DataStructure-C
-常用数据结构的C语言实现
+# DataStructure
+常用数据结构的C/C++实现
