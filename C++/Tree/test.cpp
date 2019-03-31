@@ -1,10 +1,12 @@
 #include <iostream>
+#include <vector>
 #include "BinarySearchTree.hpp"
+#include "AVLTree.hpp"
 using namespace std;
-
 
 int main()
 {
+#if 0
 	BinarySearchTree<int> bst;
 	bst.Insert(5);
 	bst.Insert(6);
@@ -34,5 +36,17 @@ int main()
 	bst.Insert(9);
 	bst.Insert(8);
 	bst.InOrder();
+#endif
+
+	AVLTree<int> avlt;
+	vector<int> v = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+	for (const auto& e : v) {
+		avlt.Insert(e);
+	}
+	cout << avlt.IsBalanceTree() << endl;
+
+	avlt.InOrder();
+	avlt.Destroy();
+
 	return 0;
 }
