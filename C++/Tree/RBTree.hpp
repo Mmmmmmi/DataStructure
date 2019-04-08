@@ -190,6 +190,31 @@ public:
 		return true;
 	}
 
+	bool IsValidRBTree() const
+	{
+		if (_root == nullptr) {
+			return true;
+		}
+
+		if (_root->_color != BLACK) {
+			std::cout << "_root->_color != BLACK" << std::endl;
+			return false;
+		}
+
+		//因为每条路径的黑色节点个数相同，因此先随便获取一个路径上黑色节点的个数
+		size_t blackcount = 0;
+		PNode pCur = _root;
+		while (pCur != nullptr) {
+			if (pCur->_color == BLACK) {
+				blackcount++;
+			}
+			pCur = pCur->_leftChild;
+		}
+
+		size_t pathbalckcount = 0; //当前路径上黑色节点的个数
+		return _IsValidRBTree(_root, pathbalckcount, blackcount);
+	}
+
 	void InOrder()
 	{
 		_InOrder(_root);
@@ -205,7 +230,6 @@ public:
 	{
 		_Destroy(_root);
 	}
-
 
 private:
 
@@ -280,6 +304,38 @@ private:
 				pGrandFather->_rightChild = pLeft;
 			}
 		}
+	}
+
+	bool _IsValidRBTree(const PNode& pRoot, size_t pathblackcount, size_t blackcount) const 
+	{
+		if (pRoot == nullptr) {
+			return true;
+		}
+
+		if (BLACK == pRoot->_color)
+			pathblackcount++;
+
+		PNode pParent = pRoot->_parent;
+		//颜色是否正确
+		if (pParent && pParent->_color == RED && pRoot->_color == RED)
+		{
+			std::cout << "parent->_color == RED && cur->_color == RED" << std::endl;
+			return false;
+		}
+
+		// 单条路径
+		if (pRoot->_leftChild == nullptr && pRoot->_rightChild == nullptr)
+		{
+			if (pathblackcount != blackcount)
+			{
+				std::cout << "pathblackcount != blackcount" << std::endl;
+				return false;
+			}
+		}
+		//判断当前路径
+		return _IsValidRBTree(pRoot->_leftChild, pathblackcount, blackcount) &&
+			_IsValidRBTree(pRoot->_rightChild, pathblackcount, blackcount);
+
 	}
 
 	PNode _root;

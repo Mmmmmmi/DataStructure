@@ -58,6 +58,6 @@ int main()
 	}
 	rbt.InOrder();
 	rbt.Destroy();
-
+	cout << rbt.IsValidRBTree() << endl;
 	return 0;
 }
