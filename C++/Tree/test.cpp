@@ -2,6 +2,7 @@
 #include <vector>
 #include "BinarySearchTree.hpp"
 #include "AVLTree.hpp"
+#include "RBTree.hpp"
 using namespace std;
 
 int main()
@@ -38,6 +39,7 @@ int main()
 	bst.InOrder();
 #endif
 
+#if 0
 	AVLTree<int> avlt;
 	vector<int> v = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
 	for (const auto& e : v) {
@@ -47,6 +49,15 @@ int main()
 
 	avlt.InOrder();
 	avlt.Destroy();
+#endif
+
+	RBTree<int> rbt;
+	vector<int> v{ 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+	for (auto e : v) {
+		rbt.Insert(e);
+	}
+	rbt.InOrder();
+	rbt.Destroy();
 
 	return 0;
 }
