@@ -1,4 +1,4 @@
-#pragma once
+pragma once
 /*
  * 七大排序
  * 冒泡
@@ -10,12 +10,24 @@
  * 归并
  */
 
-class Sort
+template <class T>
+void Swap(T &left, T &right)
+{
+	T temp = left;
+	left = right;
+	right = temp;
+}
+
+
+template<class RandomIt, class comp>
+class MySort
 {
 public:
-    Sort() {}
-    ~Sort() {}
-private:
-
+    static void BubbleSort();
+	static void SelectSort();
+	static void InsertSort();
+	static void ShellSort();
+	static void HeapSort();
+	static void QuickSort();
+	static void MerageSort();
 };
-
