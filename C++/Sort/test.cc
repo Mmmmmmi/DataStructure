@@ -11,8 +11,9 @@
 using namespace std;
 
 template<class T>
-class comp
+class Great
 {
+public:
     bool operator()(T& left, T& right) const
     {
         if (left >= right)
@@ -28,9 +29,11 @@ class comp
 
 int main()
 {
-    int a[] = {1, 2, 3, 4};
-    MySort<int, comp<int>()> m;
-    //m.BubbleSort(1, 2, comp<int>());
-    m.BubbleSort(a, a + 1);
+    int a[] = {4, 3, 2, 1};
+    MySort<int>::BubbleSort(a, a + 4, Great<int>());
+    for (int i = 0; i < 4; i++)
+    {
+        cout << a[i] << endl;
+    }
     return 0;
 }
