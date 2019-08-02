@@ -48,7 +48,27 @@ public:
 	template<class Compare>
 	static void BubbleSort(Iterator left, Iterator right, Compare comp);
 
-	static void SelectSort();
+	static void SelectSort(T* arr, size_t size);
+	static void SelectSort(T* left, T* right);
+	static void SelectSort(Iterator left, Iterator right);
+
+	template<class Compare>
+	static void SelectSort(T* arr, size_t size, Compare comp);
+
+	template<class Compare>
+	static void SelectSort(T* left, T* right, Compare comp);
+
+	template<class Compare>
+	static void SelectSort(Iterator left, Iterator right, Compare comp);
+
+
+
+
+
+
+
+
+
 	static void InsertSort();
 	static void ShellSort();
 	static void HeapSort();
@@ -56,7 +76,11 @@ public:
 	static void MerageSort();
 
 };
-
+ 
+  
+////////////////////////////////////////// 
+// BubbleSort  Start
+////////////////////////////////////////// 
 template<class T>
 void MySort<T>::BubbleSort(T* arr, size_t size)
 {
@@ -70,6 +94,11 @@ void MySort<T>::BubbleSort(T* left, T* right)
     assert(left != nullptr && right != nullptr && left <= right);
 	MySort<T>::BubbleSort(left, right, std::less<T>());
 }
+template<class T>
+void MySort<T>::BubbleSort(Iterator left, Iterator right)
+{
+    return;
+}
 
 template<class T>
 template<class Compare>
@@ -81,7 +110,7 @@ void MySort<T>::BubbleSort(T* arr, size_t size, Compare comp)
     {
         for (size_t j = 0; j < size - 1 - i; ++j)
         {
-            if (comp(*(arr + j), *(arr + j + 1)) == false)
+            if (comp(*(arr + j + 1), *(arr + j)))
             {
                 std::swap(*(arr + j), *(arr + j + 1));
                 flag = 1;
@@ -102,3 +131,72 @@ void MySort<T>::BubbleSort(T* left, T* right, Compare comp)
     int num = right - left;
     BubbleSort(left, num, comp);
 }
+
+template<class T>
+template<class Compare>
+void MySort<T>::BubbleSort(Iterator left, Iterator right, Compare comp)
+{
+    return;
+}
+////////////////////////////////////////// 
+// BubbleSort  END
+////////////////////////////////////////// 
+
+
+
+////////////////////////////////////////// 
+// SelectSort  Start
+////////////////////////////////////////// 
+
+template<class T>
+void MySort<T>::SelectSort(T* arr, size_t size)
+{
+    assert(arr != nullptr);
+    SelectSort(arr, size, std::less<T>());
+}
+
+template<class T>
+void MySort<T>::SelectSort(T* left, T* right)
+{
+    assert(left != nullptr && right != nullptr && left <= right);
+    int num = right - left;
+    SelectSort(left, num, std::less<T>());
+}
+
+template<class T>
+template<class Compare>
+void MySort<T>::SelectSort(T* arr, size_t size, Compare comp)
+{
+    assert(arr != nullptr);
+    for (size_t i = 0; i < size - 1; ++i)
+    {
+        size_t pos = 0;
+        size_t j = 0;
+        for (j = 0; j < size - 1 - i; ++j)
+        {
+            if (comp(*(arr + pos), *(arr + j + 1)))
+            {
+                pos = j + 1;
+            }
+        }
+        if (pos != j)
+        {
+            std::swap(*(arr + pos), *(arr + j));
+        }
+    }
+}
+
+
+template<class T>
+template<class Compare>
+void MySort<T>::SelectSort(T* left, T* right, Compare comp)
+{
+    assert(left != nullptr && right != nullptr && left <= right);
+    int num = right - left;
+    SelectSort(left, num, comp);
+}
+
+////////////////////////////////////////// 
+// SelectSort  END
+////////////////////////////////////////// 
+

@@ -29,8 +29,9 @@ public:
 
 int main()
 {
-    int a[] = {4, 3, 2, 1};
-    MySort<int>::BubbleSort(a, a + 4, Great<int>());
+    int a[] = {4, 9, 7, 11};
+    //MySort<int>::BubbleSort(a, a + 4, Great<int>());
+    MySort<int>::SelectSort(a, a + 4, Great<int>());
     for (int i = 0; i < 4; i++)
     {
         cout << a[i] << endl;
