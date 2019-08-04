@@ -1,12 +1,10 @@
 #pragma once
-
 /*************************************************************************
 
 	> File Name: Sort.hpp
 	> Created Time: 2019/7/29 22:47:50
 
  ************************************************************************/
-
 
 /*
  * 七大排序
@@ -61,16 +59,21 @@ public:
 	template<class Compare>
 	static void SelectSort(Iterator left, Iterator right, Compare comp);
 
+	static void InsertSort(T* arr, size_t size);
+	static void InsertSort(T* left, T* right);
+	static void InsertSort(Iterator left, Iterator right);
 
+	template<class Compare>
+	static void InsertSort(T* arr, size_t size, Compare comp);
 
+	template<class Compare>
+	static void InsertSort(T* left, T* right, Compare comp);
 
+	template<class Compare>
+	static void InsertSort(Iterator left, Iterator right, Compare comp);
 
-
-
-
-
-	static void InsertSort();
-	static void ShellSort();
+	template<class Compare>
+	static void ShellSort(T* arr, size_t size, Compare comp);
 	static void HeapSort();
 	static void QuickSort();
 	static void MerageSort();
@@ -79,7 +82,7 @@ public:
  
   
 ////////////////////////////////////////// 
-// BubbleSort  Start
+// BubbleSort Start
 ////////////////////////////////////////// 
 template<class T>
 void MySort<T>::BubbleSort(T* arr, size_t size)
@@ -139,13 +142,13 @@ void MySort<T>::BubbleSort(Iterator left, Iterator right, Compare comp)
     return;
 }
 ////////////////////////////////////////// 
-// BubbleSort  END
+// BubbleSort END
 ////////////////////////////////////////// 
 
 
 
 ////////////////////////////////////////// 
-// SelectSort  Start
+// SelectSort Start
 ////////////////////////////////////////// 
 
 template<class T>
@@ -197,6 +200,46 @@ void MySort<T>::SelectSort(T* left, T* right, Compare comp)
 }
 
 ////////////////////////////////////////// 
-// SelectSort  END
+// SelectSort END
 ////////////////////////////////////////// 
 
+////////////////////////////////////////// 
+// InsertSort START
+////////////////////////////////////////// 
+template<class T>
+template<class Compare>
+void MySort<T>::InsertSort(T* arr, size_t size, Compare comp)
+{
+	assert(arr != nullptr);
+	for (size_t i = 0; i < size; ++i)
+	{
+		for (size_t j = i; j > 0; --j)
+		{
+			if (comp(arr[j], arr[j - 1]))
+			{
+				std::swap(arr[j], arr[j - 1]);
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+}
+
+////////////////////////////////////////// 
+// InsertSort END
+////////////////////////////////////////// 
+
+////////////////////////////////////////// 
+// ShellSort START 
+////////////////////////////////////////// 
+template<class T>
+template<class Compare>
+void MySort<T>::ShellSort(T* arr, size_t size, Compare comp)
+{
+	
+}
+////////////////////////////////////////// 
+// ShellSort END
+////////////////////////////////////////// 
