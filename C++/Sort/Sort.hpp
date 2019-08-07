@@ -77,6 +77,10 @@ public:
 	static void HeapSort();
 	static void QuickSort();
 	static void MerageSort();
+private:
+
+	template<class Compare>
+	static void _InsertSort(T* arr, size_t size, Compare comp, int gap);
 
 };
  
@@ -236,9 +240,28 @@ void MySort<T>::InsertSort(T* arr, size_t size, Compare comp)
 ////////////////////////////////////////// 
 template<class T>
 template<class Compare>
+void MySort<T>::_InsertSort(T* arr, size_t size, Compare comp, int gap)
+{
+    assert(arr != nullptr);
+    for (int i = gap; i < size(); ++i)
+    {
+
+    }
+}
+ 
+template<class T>
+template<class Compare>
 void MySort<T>::ShellSort(T* arr, size_t size, Compare comp)
 {
-	
+    assert(arr != nullptr);	
+    int gap = size / 3 + 1;
+    while(1)
+    {
+        gap = gap / 3 + 1;
+        _InsertSort(arr, size, comp, gap);
+        if (gap == 1)
+            return;
+    }
 }
 ////////////////////////////////////////// 
 // ShellSort END
