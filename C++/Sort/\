@@ -246,12 +246,9 @@ void MySort<T>::_InsertSort(T* arr, size_t size, Compare comp, int gap)
     for (int i = gap; i < size; ++i)
     {
        int cur = arr[gap]; 
-       for (int j = i - gap; j >= 0; j -= gap)
+       for (int j = i - gap; j > 0; j -= gap)
        {
-            if (comp(arr[], arr[]))
-            {
-                std::swap();
-            }
+            
        }
     }
 }
