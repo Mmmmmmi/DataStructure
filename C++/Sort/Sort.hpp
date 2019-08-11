@@ -74,14 +74,32 @@ public:
 
 	template<class Compare>
 	static void ShellSort(T* arr, size_t size, Compare comp);
-	static void HeapSort();
-	static void QuickSort();
-	static void MerageSort();
+	template<class Compare>
+	static void HeapSort(T* arr, size_t size, Compare comp);
+
+	template<class Compare>
+	static void QuickSort(T* arr, size_t size, Compare comp);
+
+	template<class Compare>
+	static void MerageSort(T* arr, size_t size, Compare comp);
+
 private:
 
+    ////////////////////////////////
+    //辅助函数 START
+    
 	template<class Compare>
 	static void _InsertSort(T* arr, size_t size, Compare comp, int gap);
 
+    
+	template<class Compare>
+	static void _AdjustDown(T* arr, size_t size, Compare comp, int cur);
+
+	template<class Compare>
+	static void _CreateHeap(T* arr, size_t size, Compare comp);
+
+    //辅助函数 END
+    ///////////////////////////////
 };
  
   
@@ -219,9 +237,9 @@ void MySort<T>::InsertSort(T* arr, size_t size, Compare comp)
 	{
 		for (size_t j = i; j > 0; --j)
 		{
-			if (comp(arr[j], arr[j - 1]))
+			if (comp(*(arr + j), *(arr + j - 1)))
 			{
-				std::swap(arr[j], arr[j - 1]);
+				std::swap(*(arr + j), *(arr + j - 1));
 			}
 			else
 			{
@@ -245,12 +263,18 @@ void MySort<T>::_InsertSort(T* arr, size_t size, Compare comp, int gap)
     assert(arr != nullptr);
     for (int i = gap; i < size; ++i)
     {
-       int cur = arr[gap]; 
+        int cur = i;
        for (int j = i - gap; j >= 0; j -= gap)
        {
-            if (comp(arr[], arr[]))
+            if (comp(*(arr + cur), *(arr + j)))
             {
-                std::swap();
+                std::swap(*(arr + cur), *(arr + j));
+                cur = j;
+            }
+            else
+            {
+                //插入排序，不能插入就是有序了
+                break;
             }
        }
     }
@@ -261,7 +285,7 @@ template<class Compare>
 void MySort<T>::ShellSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);	
-    int gap = size / 3 + 1;
+    int gap = size;
     while(1)
     {
         gap = gap / 3 + 1;
@@ -272,4 +296,71 @@ void MySort<T>::ShellSort(T* arr, size_t size, Compare comp)
 }
 ////////////////////////////////////////// 
 // ShellSort END
+////////////////////////////////////////// 
+
+////////////////////////////////////////// 
+// HeapSort START
+////////////////////////////////////////// 
+
+
+
+template<class T>
+template<class Compare>
+void MySort<T>::_AdjustDown(T* arr, size_t size, Compare comp, int cur)
+{
+    assert(arr != nullptr);
+    int left = (cur << 1) + 1;
+    int right = (cur << 1) + 2;
+    int max = left;
+    if (right < size && comp(*(arr + left), *(arr + right)))
+    { 
+        max = right;
+    }
+    if (comp(*(arr + cur), *(arr + max)))
+    {
+        std::swap(*(arr + cur), *(arr + max));
+        _AdjustDown(arr, size, comp, max);
+    }
+}
+
+
+template<class T>
+template<class Compare>
+void MySort<T>::_CreateHeap(T* arr, size_t size, Compare comp)
+{
+    assert(arr != nullptr);
+    //1. 创建堆步骤，从第一个非叶子节点开始，做向下调整
+    int cur = (size - 1 - 1) >> 1; 
+    while(cur >= 0)
+    {
+        _AdjustDown(arr, size, comp, cur);
+        --cur;
+    }
+}
+
+
+template<class T>
+template<class Compare>
+void MySort<T>::HeapSort(T* arr, size_t size, Compare comp)
+{
+    assert(arr != nullptr);
+    //1. 创建堆
+    //默认创建的是大堆，这样能保证堆顶的是最大值
+    _CreateHeap(arr, size, comp);
+    //2. 堆排序
+    //根据大堆特性，每次向下调整后，将最大值交换到最后去，然后继续开始向下调整
+    int end = size - 1; //最后一个元素
+    while(end >= 0)
+    {
+        std::swap(*(arr + 0), *(arr + end)); //最大的挪走
+        _AdjustDown(arr, end, comp, 0);
+        --end;
+    }
+}
+
+
+
+
+////////////////////////////////////////// 
+// HeapSort END
 ////////////////////////////////////////// 
