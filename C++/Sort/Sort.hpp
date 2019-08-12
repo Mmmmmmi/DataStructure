@@ -18,8 +18,10 @@
  * 
  * 传参支持 指针 容器 
  * 支持范围传参(指针、迭代器) 以及 起始下标 + 元素个数
- * 默认比较方式为 less，可以自定义比较器 
  * 排序范围为 [)
+ * 默认比较器都是 Less  >=  true    < false
+ *                Great >=  true    < false
+ * 
  *
  */
 
@@ -81,16 +83,17 @@ public:
 	static void QuickSort(T* arr, size_t size, Compare comp);
 
 	template<class Compare>
-	static void MerageSort(T* arr, size_t size, Compare comp);
+	static void MergeSort(T* arr, size_t size, Compare comp);
 
 private:
 
     ////////////////////////////////
     //辅助函数 START
     
+    static void _Print(T* arr, size_t size);
+
 	template<class Compare>
 	static void _InsertSort(T* arr, size_t size, Compare comp, int gap);
-
     
 	template<class Compare>
 	static void _AdjustDown(T* arr, size_t size, Compare comp, int cur);
@@ -98,11 +101,32 @@ private:
 	template<class Compare>
 	static void _CreateHeap(T* arr, size_t size, Compare comp);
 
+    template<class Compare>
+    static int _Partition(T* arr, int left, int right, Compare comp);
+
+    template<class Compare>
+    static void _MergeSort(T* arr, size_t size, Compare comp, T* extra[]);
+
+    template<class Compare>
+    static void _Merge(T* arr, int left, int mid, int right, Compare comp, T* extra[]);
+
     //辅助函数 END
     ///////////////////////////////
 };
  
   
+template<class T>
+void MySort<T>::_Print(T* arr, size_t size)
+{
+    assert(arr != nullptr);
+    for (size_t i = 0; i < size; i++)
+    {
+        std::cout << *(arr + i) << " ";
+    }
+    std::cout << std::endl;
+}
+
+
 ////////////////////////////////////////// 
 // BubbleSort Start
 ////////////////////////////////////////// 
@@ -311,6 +335,10 @@ void MySort<T>::_AdjustDown(T* arr, size_t size, Compare comp, int cur)
     assert(arr != nullptr);
     int left = (cur << 1) + 1;
     int right = (cur << 1) + 2;
+    if (left >= size)
+    {
+        return;
+    }
     int max = left;
     if (right < size && comp(*(arr + left), *(arr + right)))
     { 
@@ -339,6 +367,7 @@ void MySort<T>::_CreateHeap(T* arr, size_t size, Compare comp)
 }
 
 
+
 template<class T>
 template<class Compare>
 void MySort<T>::HeapSort(T* arr, size_t size, Compare comp)
@@ -352,15 +381,106 @@ void MySort<T>::HeapSort(T* arr, size_t size, Compare comp)
     int end = size - 1; //最后一个元素
     while(end >= 0)
     {
+        //std:: cout << "Befor Swap : " ;
+        //_Print(arr, size);
         std::swap(*(arr + 0), *(arr + end)); //最大的挪走
+        //std:: cout << "After Swap : " ;
+        //_Print(arr, size);
         _AdjustDown(arr, end, comp, 0);
         --end;
     }
 }
 
+////////////////////////////////////////// 
+// HeapSort END
+////////////////////////////////////////// 
 
+////////////////////////////////////////// 
+// QuickSort END
+////////////////////////////////////////// 
+
+template<class T>
+template<class Compare>
+int MySort<T>::_Partition(T* arr, int left, int right, Compare comp)
+{
+    assert(arr != nullptr);
+    /*
+    if (left >= right)
+    {
+        return left;
+    }
+    */
+    while(left < right)
+    {
+        while(left < right && comp(*(arr + left), *(arr + right)))
+        {
+            left++;
+        }
+
+        while(left < right && comp(*(arr + left), *(arr + right)))
+        {
+            right--;
+        }
+        std::swap(*(arr + left), *(arr + right));
+    }
+    std::swap(*(arr + left), *(arr + right));
+    return left;
+}
+template<class T>
+template<class Compare>
+void MySort<T>::QuickSort(T* arr, size_t size, Compare comp)
+{
+    assert(arr != nullptr);
+    if (size <= 1)
+    {
+        return;
+    }
+    //1 2 3 4 5 6 
+    //0 1 2 3 4 5     
+    int left = 0;
+    int right = size - 1;
+    std:: cout << "Befor Swap : " ;
+    _Print(arr, size);
+    int ret = _Partition(arr, left, right, comp);
+    std:: cout << "After Swap : " ;
+    _Print(arr, size);
+    QuickSort(arr, ret, comp);
+    QuickSort(arr + ret + 1, size - ret - 1, comp);
+}
+
+////////////////////////////////////////// 
+// QuickSort END
+////////////////////////////////////////// 
+
+////////////////////////////////////////// 
+// Sort END
+////////////////////////////////////////// 
+
+template<class T>
+template<class Compare>
+void MySort<T>::_MergeSort(T* arr, size_t size, Compare comp, T* extra[])
+{
+
+}
+
+
+template<class T>
+template<class Compare>
+void MySort<T>::_Merge(T* arr, int left, int mid, int right, Compare comp, T* extra[])
+{
+
+}
+
+template<class T>
+template<class Compare>
+void MySort<T>::MergeSort(T* arr, size_t size, Compare comp)
+{
+    T* extra = new T[size];
+   _MergeSort();     
+   delete[] extra;
+}
 
 
 ////////////////////////////////////////// 
-// HeapSort END
+// QuickSort END
 ////////////////////////////////////////// 
