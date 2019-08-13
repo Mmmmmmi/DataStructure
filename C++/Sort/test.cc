@@ -50,7 +50,7 @@ int main()
     //int a[] = {9, 6};
     //MySort<int>::BubbleSort(a, a + 4, Great<int>());
     //MySort<int>::SelectSort(a, a + 4, Great<int>());
-    MySort<int>::QuickSort(a, sizeof(a) / sizeof(a[0]), std::less<int>());
+    MySort<int>::MergeSort(a, sizeof(a) / sizeof(a[0]), Less<int>());
     //MySort<int>::QuickSort(a, sizeof(a) / sizeof(a[0]), Great<int>());
     for (int i = 0; i < sizeof(a) / sizeof(a[0]); i++)
     {
