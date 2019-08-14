@@ -40,50 +40,50 @@ public:
     static void BubbleSort(Iterator left, Iterator right);
 
     template<class Compare>
-        static void BubbleSort(T* arr, size_t size, Compare comp);
+    static void BubbleSort(T* arr, size_t size, Compare comp);
 
     template<class Compare>
-        static void BubbleSort(T* left, T* right, Compare comp);
+    static void BubbleSort(T* left, T* right, Compare comp);
 
     template<class Compare>
-        static void BubbleSort(Iterator left, Iterator right, Compare comp);
+    static void BubbleSort(Iterator left, Iterator right, Compare comp);
 
     static void SelectSort(T* arr, size_t size);
     static void SelectSort(T* left, T* right);
     static void SelectSort(Iterator left, Iterator right);
 
     template<class Compare>
-        static void SelectSort(T* arr, size_t size, Compare comp);
+    static void SelectSort(T* arr, size_t size, Compare comp);
 
     template<class Compare>
-        static void SelectSort(T* left, T* right, Compare comp);
+    static void SelectSort(T* left, T* right, Compare comp);
 
     template<class Compare>
-        static void SelectSort(Iterator left, Iterator right, Compare comp);
+    static void SelectSort(Iterator left, Iterator right, Compare comp);
 
     static void InsertSort(T* arr, size_t size);
     static void InsertSort(T* left, T* right);
     static void InsertSort(Iterator left, Iterator right);
 
     template<class Compare>
-        static void InsertSort(T* arr, size_t size, Compare comp);
+    static void InsertSort(T* arr, size_t size, Compare comp);
 
     template<class Compare>
-        static void InsertSort(T* left, T* right, Compare comp);
+    static void InsertSort(T* left, T* right, Compare comp);
 
     template<class Compare>
-        static void InsertSort(Iterator left, Iterator right, Compare comp);
+    static void InsertSort(Iterator left, Iterator right, Compare comp);
 
     template<class Compare>
-        static void ShellSort(T* arr, size_t size, Compare comp);
+    static void ShellSort(T* arr, size_t size, Compare comp);
     template<class Compare>
-        static void HeapSort(T* arr, size_t size, Compare comp);
+    static void HeapSort(T* arr, size_t size, Compare comp);
 
     template<class Compare>
-        static void QuickSort(T* arr, size_t size, Compare comp);
+    static void QuickSort(T* arr, size_t size, Compare comp);
 
     template<class Compare>
-        static void MergeSort(T* arr, size_t size, Compare comp);
+    static void MergeSort(T* arr, size_t size, Compare comp);
 
 private:
 
@@ -93,29 +93,29 @@ private:
     static void _Print(T* arr, size_t size);
 
     template<class Compare>
-        static void _InsertSort(T* arr, size_t size, Compare comp, int gap);
+    static void _InsertSort(T* arr, size_t size, Compare comp, int gap);
 
     template<class Compare>
-        static void _AdjustDown(T* arr, size_t size, Compare comp, int cur);
+    static void _AdjustDown(T* arr, size_t size, Compare comp, int cur);
 
     template<class Compare>
-        static void _CreateHeap(T* arr, size_t size, Compare comp);
+    static void _CreateHeap(T* arr, size_t size, Compare comp);
 
     template<class Compare>
-        static int _Partition(T* arr, int left, int right, Compare comp);
+    static int _Partition(T* arr, int left, int right, Compare comp);
 
     template<class Compare>
-        static void _MergeSort(T* arr, int left, int right, Compare comp, T* extra);
+    static void _MergeSort(T* arr, int left, int right, Compare comp, T* extra);
 
     template<class Compare>
-        static void _Merge(T* arr, int left, int mid, int right, Compare comp, T* extra);
+    static void _Merge(T* arr, int left, int mid, int right, Compare comp, T* extra);
 
     //辅助函数 END
     ///////////////////////////////
 };
 
 
-    template<class T>
+template<class T>
 void MySort<T>::_Print(T* arr, size_t size)
 {
     assert(arr != nullptr);
@@ -130,27 +130,27 @@ void MySort<T>::_Print(T* arr, size_t size)
 ////////////////////////////////////////// 
 // BubbleSort Start
 ////////////////////////////////////////// 
-    template<class T>
+template<class T>
 void MySort<T>::BubbleSort(T* arr, size_t size)
 {
     assert(arr != nullptr);
     MySort<T>::BubbleSort(arr, size, std::less<T>());
 }
 
-    template<class T>
+template<class T>
 void MySort<T>::BubbleSort(T* left, T* right)
 {
     assert(left != nullptr && right != nullptr && left <= right);
     MySort<T>::BubbleSort(left, right, std::less<T>());
 }
-    template<class T>
+template<class T>
 void MySort<T>::BubbleSort(Iterator left, Iterator right)
 {
     return;
 }
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::BubbleSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);
@@ -173,7 +173,7 @@ void MySort<T>::BubbleSort(T* arr, size_t size, Compare comp)
 }
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::BubbleSort(T* left, T* right, Compare comp)
 {
     assert(left != nullptr && right != nullptr && left <= right);
@@ -182,7 +182,7 @@ void MySort<T>::BubbleSort(T* left, T* right, Compare comp)
 }
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::BubbleSort(Iterator left, Iterator right, Compare comp)
 {
     return;
@@ -197,7 +197,7 @@ void MySort<T>::BubbleSort(Iterator left, Iterator right, Compare comp)
 // SelectSort Start
 ////////////////////////////////////////// 
 
-    template<class T>
+template<class T>
 void MySort<T>::SelectSort(T* arr, size_t size)
 {
     assert(arr != nullptr);
@@ -213,7 +213,7 @@ void MySort<T>::SelectSort(T* left, T* right)
 }
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::SelectSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);
@@ -237,7 +237,7 @@ void MySort<T>::SelectSort(T* arr, size_t size, Compare comp)
 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::SelectSort(T* left, T* right, Compare comp)
 {
     assert(left != nullptr && right != nullptr && left <= right);
@@ -253,7 +253,7 @@ void MySort<T>::SelectSort(T* left, T* right, Compare comp)
 // InsertSort START
 ////////////////////////////////////////// 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::InsertSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);
@@ -281,7 +281,7 @@ void MySort<T>::InsertSort(T* arr, size_t size, Compare comp)
 // ShellSort START 
 ////////////////////////////////////////// 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::_InsertSort(T* arr, size_t size, Compare comp, int gap)
 {
     assert(arr != nullptr);
@@ -305,7 +305,7 @@ void MySort<T>::_InsertSort(T* arr, size_t size, Compare comp, int gap)
 }
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::ShellSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);	
@@ -329,7 +329,7 @@ void MySort<T>::ShellSort(T* arr, size_t size, Compare comp)
 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::_AdjustDown(T* arr, size_t size, Compare comp, int cur)
 {
     assert(arr != nullptr);
@@ -353,7 +353,7 @@ void MySort<T>::_AdjustDown(T* arr, size_t size, Compare comp, int cur)
 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::_CreateHeap(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);
@@ -369,7 +369,7 @@ void MySort<T>::_CreateHeap(T* arr, size_t size, Compare comp)
 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::HeapSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);
@@ -400,7 +400,7 @@ void MySort<T>::HeapSort(T* arr, size_t size, Compare comp)
 ////////////////////////////////////////// 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 int MySort<T>::_Partition(T* arr, int left, int right, Compare comp)
 {
     assert(arr != nullptr);
@@ -427,7 +427,7 @@ int MySort<T>::_Partition(T* arr, int left, int right, Compare comp)
     return left;
 }
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::QuickSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);
@@ -453,11 +453,11 @@ void MySort<T>::QuickSort(T* arr, size_t size, Compare comp)
 ////////////////////////////////////////// 
 
 ////////////////////////////////////////// 
-// Sort END
+// MergeSort END
 ////////////////////////////////////////// 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::_Merge(T* arr, int left, int mid, int right, Compare comp, T* extra)
 {
     assert(arr != nullptr && extra != nullptr);
@@ -500,7 +500,7 @@ void MySort<T>::_Merge(T* arr, int left, int mid, int right, Compare comp, T* ex
 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::_MergeSort(T* arr, int left, int right, Compare comp, T* extra)
 {
     assert(arr != nullptr && extra != nullptr);
@@ -524,7 +524,7 @@ void MySort<T>::_MergeSort(T* arr, int left, int right, Compare comp, T* extra)
 
 
 template<class T>
-    template<class Compare>
+template<class Compare>
 void MySort<T>::MergeSort(T* arr, size_t size, Compare comp)
 {
     assert(arr != nullptr);
@@ -535,5 +535,5 @@ void MySort<T>::MergeSort(T* arr, size_t size, Compare comp)
 
 
 ////////////////////////////////////////// 
-// QuickSort END
+// MergeSort END
 ////////////////////////////////////////// 
